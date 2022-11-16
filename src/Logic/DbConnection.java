@@ -10,8 +10,10 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author nacho
+ * Class that establishes the connection with a DB called bookings_db. This DB
+ * was previously created using MySql. It has an empty constructor and a method
+ * called connect().
+ * @author Juan Ignacio Campos Martí
  */
 public class DbConnection {
     public String db = "bookings_db";
@@ -22,6 +24,12 @@ public class DbConnection {
     public DbConnection() {
     }
     
+    /**
+     * Method that establishes the connection to the DB using the MySql driver
+     * and the URL, User and Password attributes given above.
+     * @return an instance of java.sql.Connection filled with the required
+     * data to establish a connection to our DB called bookings_db
+     */
     public Connection connect(){
         Connection connection = null;
         

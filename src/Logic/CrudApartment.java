@@ -4,7 +4,7 @@
  */
 package Logic;
 
-import Data.Apartment;
+import entity.Apartment;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
@@ -14,8 +14,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author nacho
+ * Class that establishes the CRUD methods to Create, Retrieve, Update and 
+ * Delete Apartments in the table 'room' of the DB bookings_db.
+ * @author Juan Ignacio Campos Martí
  */
 public class CrudApartment {
     private DbConnection mysql = new DbConnection();
@@ -23,7 +24,15 @@ public class CrudApartment {
     private String sSql = "";
     public int totalRegistries;
     
-    public DefaultTableModel show(String search){
+    /**
+     * Method that finds Apartments by their floor field.
+     * It will be later linked to the listener of the 'Buscar por planta'
+     * button (btnSearch).
+     * @param search The data entered by the user to be found in the DB.
+     * @return  An instance of javax.swing.table.DefaultTableModel with all
+     * the rows found.
+     */
+    public DefaultTableModel findByFloor(String search){
         DefaultTableModel model;
         
         String[] headers = {"ID", "Número", "Planta", "Descripción", 
@@ -63,7 +72,14 @@ public class CrudApartment {
         }
     }
     
-    public boolean insert (Apartment apartment){
+    /**
+     * Method that enters a new Apartment in the DB.
+     * It will be later linked to the listener of the 'Nuevo' button (btnNew).
+     * @param apartment The data of the new Apartment to be stored in the DB.
+     * @return True if the new Apartment was stored successfully or false if 
+     * it was not.
+     */
+    public boolean create (Apartment apartment){
         
         sSql = "INSERT INTO room (room_number, floor, description, features, " +
                 "price, status, room_type) values (?, ?, ?, ?, ?, ?, ?)";
@@ -93,6 +109,14 @@ public class CrudApartment {
         }
     }
     
+    /**
+     * Method that updates an Apartment in the DB.
+     * It will be later linked to the listener of the 'Editar' button 
+     * (btnUpdate).
+     * @param apartment The data of the Apartment to be updated in the DB.
+     * @return True if the Apartment was updated successfully or false if 
+     * it was not.
+     */
     public boolean update (Apartment apartment){
         
         sSql = "UPDATE room SET room_number=?, floor=?, description=?,"
@@ -124,6 +148,14 @@ public class CrudApartment {
         }
     }
         
+    /**
+     * Method that deletes an Apartment in the DB.
+     * It will be later linked to the listener of the 'Eliminar' button 
+     * (btnDelete).
+     * @param apartment The data of the Apartment to be deleted in the DB.
+     * @return True if the Apartment was deleted successfully or false if 
+     * it was not.
+     */
     public boolean delete (Apartment apartment){
         
         sSql = "DELETE FROM room WHERE id_room=?";

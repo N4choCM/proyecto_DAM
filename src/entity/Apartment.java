@@ -2,11 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Data;
+package entity;
 
 /**
- *
- * @author nacho
+ * Model of the apartments to be stored in the DB. The attributes have the exact
+ * same name as in the DB table called 'room' - that is why camelCase is not
+ * used. It also has an empty constructor and another one with all the 
+ * parameters. Additionally, the getters and setter for each attribute are found,
+ * as well as the toString() method.
+ * @author Juan Ignacio Campos Martí
  */
 public class Apartment {
     private int id_room;
@@ -21,7 +25,9 @@ public class Apartment {
     public Apartment() {
     }
 
-    public Apartment(int id_room, String room_number, String floor, String description, String features, double price, String status, String room_type) {
+    public Apartment(int id_room, String room_number, String floor, 
+            String description, String features, double price, String status, 
+            String room_type) {
         this.id_room = id_room;
         this.room_number = room_number;
         this.floor = floor;

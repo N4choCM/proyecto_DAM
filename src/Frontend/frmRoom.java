@@ -4,14 +4,15 @@
  */
 package Frontend;
 
-import Data.Apartment;
+import entity.Apartment;
 import Logic.CrudApartment;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author nacho
+ * Class where the frontend side of the Apartments manager is developed, as well
+ * as the listeners for all the components.
+ * @author Juan Ignacio Campos Martí
  */
 public class frmRoom extends javax.swing.JFrame {
 
@@ -20,7 +21,7 @@ public class frmRoom extends javax.swing.JFrame {
      */
     public frmRoom() {
         initComponents();
-        show("");
+        findByFloor("");
         disableComponents();
     }
 
@@ -34,6 +35,10 @@ public class frmRoom extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Procedure that disables all the components of the frame so that the user
+     * cannot write anything.
+     */
     void disableComponents() {
         txtIdRoom.setVisible(false);
         cbFloor.setEnabled(false);
@@ -53,6 +58,10 @@ public class frmRoom extends javax.swing.JFrame {
         txtDescription.setText("");
     }
 
+    /**
+     * Procedure that enables all the components of the frame so that the user
+     * can write anything.
+     */
     void enableComponents() {
         txtIdRoom.setVisible(false);
         cbFloor.setEnabled(true);
@@ -72,17 +81,22 @@ public class frmRoom extends javax.swing.JFrame {
         txtDescription.setText("");
     }
 
-    void show(String search) {
+    /**
+     * Procedure that finds Apartments by their floor field. It also shows the
+     * total number of Apartments registered in the DB.
+     * @param search The floor data to be found in the DB entries.
+     */
+    void findByFloor(String search) {
 
         try {
             DefaultTableModel model;
             CrudApartment crudApartment = new CrudApartment();
-            model = crudApartment.show(search);
+            model = crudApartment.findByFloor(search);
 
             table.setModel(model);
             hideColumns();
             lblTotalRegistries.setText(
-                    "Ttotal registros: "
+                    "Total registros: "
                     + Integer.toString(crudApartment.totalRegistries)
             );
         } catch (Exception e) {
@@ -500,25 +514,46 @@ public class frmRoom extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdRoomActionPerformed
 
+    /**
+     * Procedure that allows the user to automatically go to the next field 
+     * once the 'Enter' key is pressed.
+     * @param evt An instance of java.awt.event.ActionEvent
+     */
     private void txtRoomNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRoomNumberActionPerformed
-        // TODO add your handling code here:
         txtRoomNumber.transferFocus();
     }//GEN-LAST:event_txtRoomNumberActionPerformed
 
+    /**
+     * Procedure that allows the user to automatically go to the next field 
+     * once the 'Enter' key is pressed.
+     * @param evt An instance of java.awt.event.ActionEvent
+     */
     private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
-        // TODO add your handling code here:
         txtPrice.transferFocus();
     }//GEN-LAST:event_txtPriceActionPerformed
-
+    
+    /**
+     * Procedure that calls enableComponents(), sets the text of the btnSave 
+     * button as 'Guardar' and changes the value of the action attribute
+     * to 'guardar'.
+     * @param evt A click in the btnNew.
+     */
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-        // TODO add your handling code here:
         enableComponents();
         btnSave.setText("Guardar");
         action = "guardar";
     }//GEN-LAST:event_btnNewActionPerformed
 
+    /**
+     * Procedure that saves a new Apartment in the DB or updates an existing one
+     * once the btnSave button is clicked depending on whether the value of the
+     * action attribute is 'guardar' or 'editar'. It also validates all the 
+     * fields in the form so that the user must enter something in every single 
+     * field. Once the Apartment is successfully saved or updated, the
+     * disableComponents() procedure is called.
+     * @param evt A click in the btnSave.
+     */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
         if (txtRoomNumber.getText().length() == 0) {
             JOptionPane.showConfirmDialog(
                     rootPane,
@@ -530,7 +565,8 @@ public class frmRoom extends javax.swing.JFrame {
         if (txtDescription.getText().length() == 0) {
             JOptionPane.showConfirmDialog(
                     rootPane,
-                    "Por favor, introduzca la descripción del apartamento."
+                    "Por favor, introduzca la descripción "
+                            + "del apartamento."
             );
             txtDescription.requestFocus();
             return;
@@ -538,7 +574,8 @@ public class frmRoom extends javax.swing.JFrame {
         if (txtFeatures.getText().length() == 0) {
             JOptionPane.showConfirmDialog(
                     rootPane,
-                    "Por favor, introduzca las características del apartamento."
+                    "Por favor, introduzca las características "
+                            + "del apartamento."
             );
             txtFeatures.requestFocus();
             return;
@@ -546,7 +583,8 @@ public class frmRoom extends javax.swing.JFrame {
         if (txtPrice.getText().length() == 0) {
             JOptionPane.showConfirmDialog(
                     rootPane,
-                    "Por favor, introduzca el precio por noche del apartamento."
+                    "Por favor, introduzca el precio por noche "
+                            + "del apartamento."
             );
             txtPrice.requestFocus();
             return;
@@ -567,12 +605,12 @@ public class frmRoom extends javax.swing.JFrame {
         apartment.setRoom_type((String) cbRoomType.getItemAt(selectedItem));
 
         if (action.equals("guardar")) {
-            if (crudApartment.insert(apartment)) {
+            if (crudApartment.create(apartment)) {
                 JOptionPane.showMessageDialog(
                         rootPane,
                         "Se registró el apartamento satisfactoriamente."
                 );
-                show("");
+                findByFloor("");
                 disableComponents();
 
             }
@@ -584,13 +622,19 @@ public class frmRoom extends javax.swing.JFrame {
                         rootPane,
                         "Se actualizó el apartamento satisfactoriamente."
                 );
-                show("");
+                findByFloor("");
                 disableComponents();
 
             }
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    /**
+     * Procedure that deletes an Apartment in the DB once the btnDelete is 
+     * clicked. Once the Apartment is successfully deleted, the 
+     * disableComponents() procedure is called.
+     * @param evt A click on btnDelete.
+     */
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
         if (!txtIdRoom.getText().equals("")) {
@@ -610,29 +654,46 @@ public class frmRoom extends javax.swing.JFrame {
                                 txtIdRoom.getText()
                         ));
                 crudApartment.delete(apartment);
-                show("");
+                findByFloor("");
                 disableComponents();
             }
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    /**
+     * Procedure that finds Apartments by their floor field once the 
+     * btnSearch is pressed.
+     * @param evt A click on btnSearch.
+     */
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
-        show(txtSearch.getText());
+        findByFloor(txtSearch.getText());
     }//GEN-LAST:event_btnSearchActionPerformed
 
+    /**
+     * Procedure that allows the user to automatically go to the next field 
+     * once the 'Enter' key is pressed.
+     * @param evt An instance of java.awt.event.ActionEvent
+     */
     private void cbFloorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFloorActionPerformed
-        // TODO add your handling code here:
         cbFloor.transferFocus();
     }//GEN-LAST:event_cbFloorActionPerformed
 
+    /**
+     * Procedure that allows the user to automatically go to the next field 
+     * once the 'Enter' key is pressed.
+     * @param evt An instance of java.awt.event.ActionEvent
+     */
     private void cbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStatusActionPerformed
         // TODO add your handling code here:
         cbStatus.transferFocus();
     }//GEN-LAST:event_cbStatusActionPerformed
 
+    /**
+     * Procedure that allows the user to update or delete an Apartment once the
+     * registry of this Apartment is clicked with the mouse on the table.
+     * @param evt A click on a row of the table.
+     */
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-        // TODO add your handling code here:
         btnSave.setText("Editar");
         enableComponents();
         btnDelete.setEnabled(true);
@@ -650,8 +711,12 @@ public class frmRoom extends javax.swing.JFrame {
         cbRoomType.setSelectedItem(table.getValueAt(row, 7).toString());
     }//GEN-LAST:event_tableMouseClicked
 
+    /**
+     * Procedure that allows the user to get out of this frame once the 'Salir'
+     * button (btnOut) is clicked.
+     * @param evt A click on btnOut.
+     */
     private void btnOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOutActionPerformed
-        // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnOutActionPerformed
 
