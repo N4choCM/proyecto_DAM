@@ -35,7 +35,7 @@ public class CrudCustomer {
      * @return An instance of javax.swing.table.DefaultTableModel with all the
      * rows found.
      */
-    public DefaultTableModel findPerson(String search) {
+    public DefaultTableModel findCustomer(String search) {
         DefaultTableModel model;
 
         String[] headers = {"ID", "Nombre", "Apellidos", "DNI", "Dirección",
@@ -105,7 +105,7 @@ public class CrudCustomer {
             preparedStatement.setString(5, customer.getPhone());
             preparedStatement.setString(6, customer.getEmail());
 
-            preparedStatement2.setInt(1, customer.getId_customer());
+            preparedStatement2.setString(1, customer.getId_customer());
 
             int i = preparedStatement.executeUpdate();
 
@@ -155,7 +155,7 @@ public class CrudCustomer {
             preparedStatement.setString(6, customer.getEmail());
             preparedStatement.setInt(7, customer.getId_person());
 
-            preparedStatement2.setInt(1, customer.getId_customer());
+            preparedStatement2.setString(1, customer.getId_customer());
             preparedStatement2.setInt(2, customer.getId_person());
 
             int i = preparedStatement.executeUpdate();

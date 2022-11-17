@@ -14,20 +14,20 @@ package entity;
  * @author Juan Ignacio Campos Martí
  */
 public class Customer extends Person{
-    private int id_customer;
+    private String id_customer;
 
     public Customer() {
     }
 
-    public Customer(int id_customer) {
+    public Customer(String id_customer) {
         this.id_customer = id_customer;
     }
 
-    public int getId_customer() {
+    public String getId_customer() {
         return id_customer;
     }
 
-    public void setId_customer(int id_customer) {
+    public void setId_customer(String id_customer) {
         this.id_customer = id_customer;
     }
 
@@ -35,6 +35,7 @@ public class Customer extends Person{
     public String toString() {
         return "Customer{" + "id_customer=" + id_customer + '}';
     }
-    
+
+  
     
 }
