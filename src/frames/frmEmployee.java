@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Juan Ignacio Campos Martí
  */
-public class frmEmployee extends javax.swing.JFrame {
+public class frmEmployee extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frmCustomer
@@ -181,10 +181,15 @@ public class frmEmployee extends javax.swing.JFrame {
         tableEmployees = new javax.swing.JTable();
         lblTotalRegistries = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Usuarios y Accesos");
 
         jPanel1.setBackground(new java.awt.Color(0, 173, 181));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de trabajadores", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(238, 238, 238))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de trabajadores", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(238, 238, 238))); // NOI18N
         jPanel1.setForeground(new java.awt.Color(238, 238, 238));
 
         txtIdPerson.setBackground(new java.awt.Color(238, 238, 238));
@@ -212,7 +217,7 @@ public class frmEmployee extends javax.swing.JFrame {
         btnNew.setBackground(new java.awt.Color(57, 62, 70));
         btnNew.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnNew.setForeground(new java.awt.Color(238, 238, 238));
-        btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/nuevo.png"))); // NOI18N
+        btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/empleado.png"))); // NOI18N
         btnNew.setText("Nuevo");
         btnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,7 +228,7 @@ public class frmEmployee extends javax.swing.JFrame {
         btnSave.setBackground(new java.awt.Color(57, 62, 70));
         btnSave.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnSave.setForeground(new java.awt.Color(238, 238, 238));
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/salvar.png"))); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/salvar (1).png"))); // NOI18N
         btnSave.setText("Guardar");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -234,7 +239,7 @@ public class frmEmployee extends javax.swing.JFrame {
         btnCancel.setBackground(new java.awt.Color(57, 62, 70));
         btnCancel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnCancel.setForeground(new java.awt.Color(238, 238, 238));
-        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/cruz.png"))); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/cruz (1).png"))); // NOI18N
         btnCancel.setText("Cancelar");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -371,18 +376,12 @@ public class frmEmployee extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 257, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnNew)
-                                .addGap(52, 52, 52)
-                                .addComponent(btnSave)
-                                .addGap(49, 49, 49)
-                                .addComponent(btnCancel))))
+                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -392,6 +391,12 @@ public class frmEmployee extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(106, 106, 106)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnNew)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSave)
+                                .addGap(35, 35, 35)
+                                .addComponent(btnCancel))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -488,7 +493,7 @@ public class frmEmployee extends javax.swing.JFrame {
         jLabel1.setText("Trabajadores");
 
         jPanel2.setBackground(new java.awt.Color(0, 173, 181));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de trabajadores", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(238, 238, 238))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de trabajadores", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(238, 238, 238))); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(238, 238, 238));
@@ -500,7 +505,7 @@ public class frmEmployee extends javax.swing.JFrame {
         btnSearch.setBackground(new java.awt.Color(57, 62, 70));
         btnSearch.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnSearch.setForeground(new java.awt.Color(238, 238, 238));
-        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/buscar.png"))); // NOI18N
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buscar (1).png"))); // NOI18N
         btnSearch.setText("Buscar");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -511,7 +516,7 @@ public class frmEmployee extends javax.swing.JFrame {
         btnDelete.setBackground(new java.awt.Color(57, 62, 70));
         btnDelete.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(238, 238, 238));
-        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/borrar.png"))); // NOI18N
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/basura.png"))); // NOI18N
         btnDelete.setText("Eliminar");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -522,7 +527,7 @@ public class frmEmployee extends javax.swing.JFrame {
         btnOut.setBackground(new java.awt.Color(57, 62, 70));
         btnOut.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnOut.setForeground(new java.awt.Color(238, 238, 238));
-        btnOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/energia.png"))); // NOI18N
+        btnOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/cerrar-sesion (3).png"))); // NOI18N
         btnOut.setText("Salir");
         btnOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -621,7 +626,7 @@ public class frmEmployee extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pack();

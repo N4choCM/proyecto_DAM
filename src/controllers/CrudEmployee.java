@@ -233,5 +233,53 @@ public class CrudEmployee {
             return false;
         }
     }
+    
+    /**
+     * Method that selects a given User Name and a Password to from the DB.
+     * @param login The given User Name.
+     * @param password The given Password.
+     * @return An instance of DefaultTableModel with the requested row or null
+     * in case that the system throws an Exception.
+     */
+    public DefaultTableModel login(String login, String password) {
+        DefaultTableModel model;
+
+        String[] headers = {"ID", "Nombre", "Apellidos", "Acceso", "Login", "Contraseña", 
+            "Estado"};
+
+        String[] registries = new String[7];
+
+        totalRegistries = 0;
+        model = new DefaultTableModel(null, headers);
+
+        sSql = "SELECT p.id_person, p.name, p.last_names, e.access, e.login,"
+                + " e.password, e.status FROM  person p INNER JOIN employee e "
+                + "ON p.id_person = e.id_person WHERE e.login = '" 
+                + login + "' AND e.password = '" + password + "' AND "
+                + "e.status = 'Habilitado'";
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sSql);
+
+            while (resultSet.next()) {
+                registries[0] = resultSet.getString("id_person");
+                registries[1] = resultSet.getString("name");
+                registries[2] = resultSet.getString("last_names");
+                registries[3] = resultSet.getString("access");
+                registries[4] = resultSet.getString("login");
+                registries[5] = resultSet.getString("password");
+                registries[6] = resultSet.getString("status");
+
+                totalRegistries++;
+                model.addRow(registries);
+            }
+            return model;
+
+        } catch (SQLException e) {
+            JOptionPane.showConfirmDialog(null, e);
+            return null;
+        }
+    }
 
 }
