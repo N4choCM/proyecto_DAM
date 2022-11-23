@@ -4,8 +4,10 @@
  */
 package frames;
 
-import controllers.CrudProduct;
-import entity.Product;
+import controllers.CrudBooking;
+import entity.Booking;
+import java.util.Calendar;
+import java.sql.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,6 +28,7 @@ public class frmBooking extends javax.swing.JInternalFrame {
     }
     
     private String action = "guardar";
+    public static int idUser;
 
     /**
      * Procedure that hides the ID columns in the frame table.
@@ -129,14 +132,13 @@ public class frmBooking extends javax.swing.JInternalFrame {
 
         try {
             DefaultTableModel model;
-            CrudProduct crudProduct = new CrudProduct();
-            model = crudProduct.findByProductName(search);
+            CrudBooking crudBooking = new CrudBooking();
+            model = crudBooking.findBooking(search);
 
             tableBookings.setModel(model);
             hideColumns();
-            lblTotalRegistries.setText(
-                    "Total registros: "
-                    + Integer.toString(crudProduct.totalRegistries)
+            lblTotalRegistries.setText("Total registros: "
+                    + Integer.toString(crudBooking.totalRegistries)
             );
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(rootPane, e);
@@ -482,11 +484,21 @@ public class frmBooking extends javax.swing.JInternalFrame {
         btnSearchApartment.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnSearchApartment.setForeground(new java.awt.Color(238, 238, 238));
         btnSearchApartment.setText(". . .");
+        btnSearchApartment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchApartmentActionPerformed(evt);
+            }
+        });
 
         btnSearchCustomer.setBackground(new java.awt.Color(57, 62, 70));
         btnSearchCustomer.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnSearchCustomer.setForeground(new java.awt.Color(238, 238, 238));
         btnSearchCustomer.setText(". . .");
+        btnSearchCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchCustomerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -655,20 +667,20 @@ public class frmBooking extends javax.swing.JInternalFrame {
         if (!txtIdBooking.getText().equals("")) {
             int confirmation = JOptionPane.showConfirmDialog(
                 rootPane,
-                "¿Está seguro de eliminar el producto?",
+                "¿Está seguro de eliminar la reserva?",
                 "Confirmar",
                 2
             );
 
             if (confirmation == 0) {
-                CrudProduct crudProduct = new CrudProduct();
-                Product product = new Product();
+                CrudBooking crudBooking = new CrudBooking();
+                Booking booking = new Booking();
 
-                product.setId_product(
+                booking.setId_booking(
                     Integer.parseInt(
                         txtIdBooking.getText()
                     ));
-                    crudProduct.delete(product);
+                    crudBooking.delete(booking);
                     findBookings("");
                     disableComponents();
                 }
@@ -701,11 +713,21 @@ public class frmBooking extends javax.swing.JInternalFrame {
                 .toString());
         txtIdRoom.setText(tableBookings.getValueAt(row, 1)
                 .toString());
-        txtProductDescription.setText(tableBookings.getValueAt(row, 2)
+        txtRoomNumber.setText(tableBookings.getValueAt(row, 2)
                 .toString());
-        txtApartmentPrice.setText(tableBookings.getValueAt(row, 3).toString());
+        txtIdCustomer.setText(tableBookings.getValueAt(row, 3).toString());
+        txtCustomerName.setText(tableBookings.getValueAt(row, 4).toString());
+        txtIdEmployee.setText(tableBookings.getValueAt(row, 5).toString());
+        txtEmployeeName.setText(tableBookings.getValueAt(row, 6).toString());        
         cbBookingType.setSelectedItem(tableBookings
-                .getValueAt(row, 4).toString());
+                .getValueAt(row, 7).toString());
+        dcBookingDate.setDate(Date.valueOf(tableBookings.getValueAt(row, 8).toString()));
+        dcCheckinDate.setDate(Date.valueOf(tableBookings.getValueAt(row, 9).toString()));
+        dcCheckoutDate.setDate(Date.valueOf(tableBookings.getValueAt(row, 10).toString()));
+        txtApartmentPrice.setText(tableBookings.getValueAt(row, 11).toString());
+        cbStatus.setSelectedItem(tableBookings
+                .getValueAt(row, 12).toString());
+
     }//GEN-LAST:event_tableBookingsMouseClicked
 
     private void txtIdBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdBookingActionPerformed
@@ -755,58 +777,88 @@ public class frmBooking extends javax.swing.JInternalFrame {
         if (txtIdRoom.getText().length() == 0) {
             JOptionPane.showConfirmDialog(
                 rootPane,
-                "Por favor, introduzca el nombre del producto."
+                "Por favor, seleccione un apartamento."
             );
             txtIdRoom.requestFocus();
             return;
         }
-        if (txtProductDescription.getText().length() == 0) {
+        if (txtIdCustomer.getText().length() == 0) {
             JOptionPane.showConfirmDialog(
                 rootPane,
-                "Por favor, introduzca la descripción "
-                + "del producto."
+                "Por favor, seleccione un cliente."
             );
-            txtProductDescription.requestFocus();
+            txtIdCustomer.requestFocus();
             return;
         }
         if (txtApartmentPrice.getText().length() == 0) {
             JOptionPane.showConfirmDialog(
                 rootPane,
-                "Por favor, introduzca el PVP del producto."
+                "Por favor, introduzca el precio del apartamento."
             );
             txtApartmentPrice.requestFocus();
             return;
         }
 
-        Product product = new Product();
-        CrudProduct crudProduct = new CrudProduct();
+        Booking booking = new Booking();
+        CrudBooking crudBooking = new CrudBooking();
 
-        product.setName(txtIdRoom.getText());
-        product.setDescription(txtProductDescription.getText());
-        product.setPrice(Double.parseDouble(txtApartmentPrice.getText()));
+        booking.setId_room(Integer.parseInt(txtIdRoom.getText()));
+        booking.setId_customer(Integer.parseInt(txtIdCustomer.getText()));
+        booking.setId_employee(idUser);
         int selectedItem = cbBookingType.getSelectedIndex();
-        product.setUnit_measure((String) cbBookingType
+        booking.setType((String) cbBookingType
                 .getItemAt(selectedItem));
+        
+        Calendar calendar;
+        int d, m, y;
+        calendar = dcBookingDate.getCalendar();
+        d = calendar.get(Calendar.DAY_OF_MONTH);
+        m = calendar.get(Calendar.MONTH);
+        y = calendar.get(Calendar.YEAR) - 1900;
+        booking.setBooking_date(new Date(y, m, d));
+        
+        calendar = dcCheckinDate.getCalendar();
+        d = calendar.get(Calendar.DAY_OF_MONTH);
+        m = calendar.get(Calendar.MONTH);
+        y = calendar.get(Calendar.YEAR) - 1900;
+        booking.setCheckin_date(new Date(y, m, d));
+        
+        calendar = dcCheckoutDate.getCalendar();
+        d = calendar.get(Calendar.DAY_OF_MONTH);
+        m = calendar.get(Calendar.MONTH);
+        y = calendar.get(Calendar.YEAR) - 1900;
+        booking.setCheckout_date(new Date(y, m, d));
+        
+        booking.setPrice(Double.parseDouble(txtApartmentPrice.getText()));
+        
+        selectedItem = cbStatus.getSelectedIndex();
+        booking.setStatus((String) cbStatus
+                .getItemAt(selectedItem));
+        
+        
 
         if (action.equals("guardar")) {
-            if (crudProduct.create(product)) {
+            if (crudBooking.create(booking)) {
                 JOptionPane.showMessageDialog(
                     rootPane,
-                    "Se registró el producto satisfactoriamente."
+                    "Se registró la reserva satisfactoriamente."
                 );
                 findBookings("");
                 disableComponents();
 
             }
         } else if (action.equals("editar")) {
-            product.setId_product(Integer.parseInt(
+            booking.setId_booking(Integer.parseInt(
                     txtIdBooking.getText()
             ));
+            booking.setId_employee(Integer.parseInt(
+                    txtIdEmployee.getText()
+            ));
 
-            if (crudProduct.update(product)) {
+            if (crudBooking.update(booking)) {
                 JOptionPane.showMessageDialog(
                     rootPane,
-                    "Se actualizó el producto satisfactoriamente."
+                    "Se actualizó la reserva satisfactoriamente."
                 );
                 findBookings("");
                 disableComponents();
@@ -843,6 +895,29 @@ public class frmBooking extends javax.swing.JInternalFrame {
     private void txtEmployeeNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmployeeNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmployeeNameActionPerformed
+
+    /**
+     * Procedure that displays a list of Apartments so that the user can select
+     * one of them.
+     * @param evt A click on the "..." button (btnSearchApartment).
+     */
+    private void btnSearchApartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchApartmentActionPerformed
+        // TODO add your handling code here:
+        frmApartmentView frmApartmentView = new frmApartmentView();
+        frmApartmentView.toFront();
+        frmApartmentView.setVisible(true);
+    }//GEN-LAST:event_btnSearchApartmentActionPerformed
+
+    /**
+     * Procedure that displays a list of Customers so that the user can select
+     * one of them.
+     * @param evt A click on the "..." button (btnSearchCustomer).
+     */
+    private void btnSearchCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCustomerActionPerformed
+        frmCustomerView frmCustomerView = new frmCustomerView();
+        frmCustomerView.toFront();
+        frmCustomerView.setVisible(true);
+    }//GEN-LAST:event_btnSearchCustomerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -911,13 +986,13 @@ public class frmBooking extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblTotalRegistries;
     private javax.swing.JTable tableBookings;
     private javax.swing.JTextField txtApartmentPrice;
-    private javax.swing.JTextField txtCustomerName;
-    private javax.swing.JTextField txtEmployeeName;
+    public static javax.swing.JTextField txtCustomerName;
+    public static javax.swing.JTextField txtEmployeeName;
     private javax.swing.JTextField txtIdBooking;
-    private javax.swing.JTextField txtIdCustomer;
-    private javax.swing.JTextField txtIdEmployee;
-    private javax.swing.JTextField txtIdRoom;
-    private javax.swing.JTextField txtRoomNumber;
+    public static javax.swing.JTextField txtIdCustomer;
+    public static javax.swing.JTextField txtIdEmployee;
+    public static javax.swing.JTextField txtIdRoom;
+    public static javax.swing.JTextField txtRoomNumber;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

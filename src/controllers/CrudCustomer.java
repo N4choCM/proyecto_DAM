@@ -28,8 +28,8 @@ public class CrudCustomer {
     public int totalRegistries;
 
     /**
-     * Method that finds People in the DB. It will be later linked
-     * to the listener of the 'Buscar producto' button (btnSearch).
+     * Method that finds Customers in the DB. It will be later linked
+     * to the listener of the 'Buscar cliente' button (btnSearch).
      *
      * @param search The data entered by the user to be found in the DB.
      * @return An instance of javax.swing.table.DefaultTableModel with all the
@@ -77,10 +77,10 @@ public class CrudCustomer {
     }
 
     /**
-     * Method that enters a new Person in the DB. It will be later linked to
+     * Method that enters a new Customer in the DB. It will be later linked to
      * the listener of the 'Nuevo' button (btnNew).
      *
-     * @param customer The data of the new Person to be stored in the DB.
+     * @param customer The data of the new Customer to be stored in the DB.
      * @return True if the new Person was stored successfully or false if it
      * was not.
      */
@@ -127,11 +127,11 @@ public class CrudCustomer {
     }
 
     /**
-     * Method that updates a Person in the DB. It will be later linked to the
+     * Method that updates a Customer in the DB. It will be later linked to the
      * listener of the 'Editar' button (btnUpdate).
      *
-     * @param customer The data of the Person to be updated in the DB.
-     * @return True if the Person was updated successfully or false if it was
+     * @param customer The data of the Customer to be updated in the DB.
+     * @return True if the Customer was updated successfully or false if it was
      * not.
      */
     public boolean update(Customer customer) {
@@ -178,11 +178,11 @@ public class CrudCustomer {
     }
 
     /**
-     * Method that deletes a Person in the DB. It will be later linked to the
+     * Method that deletes a Customer in the DB. It will be later linked to the
      * listener of the 'Eliminar' button (btnDelete).
      *
-     * @param customer The data of the Person to be deleted in the DB.
-     * @return True if the Person was deleted successfully or false if it was
+     * @param customer The data of the Customer to be deleted in the DB.
+     * @return True if the Customer was deleted successfully or false if it was
      * not.
      */
     public boolean delete(Customer customer) {

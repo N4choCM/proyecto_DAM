@@ -242,7 +242,15 @@ public class frmHome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnuConsumptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsumptionsActionPerformed
-        // TODO add your handling code here:
+        frmBooking frmBooking = new frmBooking();
+        desktop.add(frmBooking);
+        frmBooking.toFront();
+        frmBooking.setVisible(true);
+        frmBooking.txtIdEmployee.setText(lblIdPerson.getText());
+        frmBooking.txtEmployeeName.setText(lblName.getText() + " " 
+                + lblLastNames.getText());
+        frmBooking.idUser = Integer.parseInt(lblIdPerson.getText());
+        
     }//GEN-LAST:event_mnuConsumptionsActionPerformed
 
     /**

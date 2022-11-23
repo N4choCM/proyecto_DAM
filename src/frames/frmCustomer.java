@@ -5,13 +5,12 @@
 package frames;
 
 import controllers.CrudCustomer;
-import controllers.CrudProduct;
 import entity.Customer;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * Class where the frontend side of the Products manager is developed, as well
+ * Class where the frontend side of the Customers manager is developed, as well
  * as the listeners for all the components.
  * @author Juan Ignacio Campos Martí
  */
@@ -95,9 +94,9 @@ public class frmCustomer extends javax.swing.JInternalFrame {
     }
 
     /**
-     * Procedure that finds Products by their name field. It also shows the
-     * total number of Products registered in the DB.
-     * @param search The product name data to be found in the DB entries.
+     * Procedure that finds Customers in the DB. It also shows the
+     * total number of Customers registered in the DB.
+     * @param search The Customer's data to be found in the DB entries.
      */
     void findCustomers(String search) {
 
@@ -538,16 +537,33 @@ public class frmCustomer extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdPersonActionPerformed
 
+    /**
+     * Procedure that allows the user to go directly to the next component by
+     * pressing Enter.
+     * @param evt A press on Enter
+     */
     private void txtCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustomerNameActionPerformed
         txtCustomerName.transferFocus();
     }//GEN-LAST:event_txtCustomerNameActionPerformed
 
+    /**
+     * Procedure that allows the user to enter data in the components once the
+     * New Button is pressed. It alse sets the text of the btnSave to "Guardar"
+     * in case it had a different value.
+     * @param evt A click on the btnNew
+     */
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
         enableComponents();
         btnSave.setText("Guardar");
         action = "guardar";
     }//GEN-LAST:event_btnNewActionPerformed
 
+    /**
+     * Procedure that saves or updates a Customer in the DB. It also changes the
+     * value of the btnSave to "Guardar" or "Actualizar" depending on the 
+     * requested action, and validates the required fields to be submitted.
+     * @param evt A click on the btnSave.
+     */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         if (txtCustomerName.getText().length() == 0) {
             JOptionPane.showConfirmDialog(
@@ -620,14 +636,27 @@ public class frmCustomer extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    /**
+     * Procedure than cancels the operation.
+     * @param evt A click on the cancel button.
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    /**
+     * Procedure that finds customers from the DB and display the results of the
+     * search in the table.
+     * @param evt A click on the btnSearch.
+     */
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         findCustomers(txtSearch.getText());
     }//GEN-LAST:event_btnSearchActionPerformed
 
+    /**
+     * Procedure that deletes a Customer from the DB.
+     * @param evt A click on btnDelete.
+     */
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
         if (!txtIdPerson.getText().equals("")) {
@@ -653,10 +682,19 @@ public class frmCustomer extends javax.swing.JInternalFrame {
             }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    /**
+     * Procedure that terminates the app once the "Salir" button is pressed.
+     * @param evt A click on the "Salir" button.
+     */
     private void btnOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOutActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnOutActionPerformed
 
+    /**
+     * Procedure that allows the user to update a Customer once one of the rows
+     * of the table containing information about a user is pressed.
+     * @param evt A click on a row of the table.
+     */
     private void tableCustomersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCustomersMouseClicked
         btnSave.setText("Editar");
         enableComponents();
@@ -683,31 +721,61 @@ public class frmCustomer extends javax.swing.JInternalFrame {
             .toString());
     }//GEN-LAST:event_tableCustomersMouseClicked
 
+    /**
+     * Procedure that allows the user to go directly to the next component by
+     * pressing Enter.
+     * @param evt A press on Enter
+     */
     private void txtLastNamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLastNamesActionPerformed
         // TODO add your handling code here:
         txtCustomerName.transferFocus();
     }//GEN-LAST:event_txtLastNamesActionPerformed
 
+    /**
+     * Procedure that allows the user to go directly to the next component by
+     * pressing Enter.
+     * @param evt A press on Enter
+     */
     private void txtNationalIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNationalIdActionPerformed
         // TODO add your handling code here:
         txtCustomerName.transferFocus();
     }//GEN-LAST:event_txtNationalIdActionPerformed
 
+    /**
+     * Procedure that allows the user to go directly to the next component by
+     * pressing Enter.
+     * @param evt A press on Enter
+     */
     private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
         // TODO add your handling code here:
         txtCustomerName.transferFocus();
     }//GEN-LAST:event_txtAddressActionPerformed
 
+    /**
+     * Procedure that allows the user to go directly to the next component by
+     * pressing Enter.
+     * @param evt A press on Enter
+     */
     private void txtPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneActionPerformed
         // TODO add your handling code here:
         txtCustomerName.transferFocus();
     }//GEN-LAST:event_txtPhoneActionPerformed
 
+    /**
+     * Procedure that allows the user to go directly to the next component by
+     * pressing Enter.
+     * @param evt A press on Enter
+     */
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
         txtCustomerName.transferFocus();
     }//GEN-LAST:event_txtEmailActionPerformed
 
+    /**
+     * Procedure that allows the user to go directly to the next component by
+     * pressing Enter.
+     * @param evt A press on Enter
+     */
     private void txtCustomerIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustomerIdActionPerformed
         // TODO add your handling code here:
         txtCustomerName.transferFocus();

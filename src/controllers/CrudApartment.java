@@ -72,6 +72,54 @@ public class CrudApartment {
         }
     }
     
+    /** TODO
+     * Method that finds Apartments by their floor field.
+     * It will be later linked to the listener of the 'Buscar por planta'
+     * button (btnSearch).
+     * @param search The data entered by the user to be found in the DB.
+     * @return  An instance of javax.swing.table.DefaultTableModel with all
+     * the rows found.
+     */
+    public DefaultTableModel findInView(String search){
+        DefaultTableModel model;
+        
+        String[] headers = {"ID", "Número", "Planta", "Descripción", 
+            "Características", "Precio", "Estado", "Tipo apartamento"};
+        
+        String[] registries = new String [8];
+        
+        totalRegistries = 0;
+        model = new DefaultTableModel(null, headers);
+        
+        sSql = "SELECT * FROM room WHERE floor LIKE '%" + search + 
+                "%' AND status = 'Disponible' ORDER BY id_room";
+        
+        try{
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sSql);
+            
+            while(resultSet.next()){
+                registries[0] = resultSet.getString("id_room");
+                registries[1] = resultSet.getString("room_number");
+                registries[2] = resultSet.getString("floor");
+                registries[3] = resultSet.getString("description");
+                registries[4] = resultSet.getString("features");
+                registries[5] = resultSet.getString("price");
+                registries[6] = resultSet.getString("status");
+                registries[7] = resultSet.getString("room_type");
+                
+                totalRegistries++;
+                model.addRow(registries);
+            }
+            return model;
+            
+            
+        }catch (SQLException e){
+            JOptionPane.showConfirmDialog(null, e);
+            return null;
+        }
+    }
+    
     /**
      * Method that enters a new Apartment in the DB.
      * It will be later linked to the listener of the 'Nuevo' button (btnNew).
