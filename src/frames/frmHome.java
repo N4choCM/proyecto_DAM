@@ -353,7 +353,7 @@ public class frmHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane desktop;
+    public static javax.swing.JDesktopPane desktop;
     public static javax.swing.JLabel lblAccess;
     public static javax.swing.JLabel lblIdPerson;
     public static javax.swing.JLabel lblLastNames;

@@ -165,6 +165,7 @@ public class frmBooking extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tableBookings = new javax.swing.JTable();
         lblTotalRegistries = new javax.swing.JLabel();
+        btnConsumptions = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         txtIdBooking = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -275,29 +276,43 @@ public class frmBooking extends javax.swing.JInternalFrame {
         lblTotalRegistries.setForeground(new java.awt.Color(238, 238, 238));
         lblTotalRegistries.setText("Registros:");
 
+        btnConsumptions.setBackground(new java.awt.Color(57, 62, 70));
+        btnConsumptions.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnConsumptions.setForeground(new java.awt.Color(238, 238, 238));
+        btnConsumptions.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/bolsa-de-dinero.png"))); // NOI18N
+        btnConsumptions.setText("Consumos");
+        btnConsumptions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsumptionsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(25, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnConsumptions)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSearch)
-                        .addGap(31, 31, 31)
-                        .addComponent(btnDelete)
-                        .addGap(27, 27, 27)
-                        .addComponent(btnOut))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTotalRegistries)
-                .addGap(78, 78, 78))
+                        .addComponent(lblTotalRegistries)
+                        .addGap(78, 78, 78))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 772, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(139, 139, 139)
+                                .addComponent(btnSearch)
+                                .addGap(31, 31, 31)
+                                .addComponent(btnDelete)
+                                .addGap(27, 27, 27)
+                                .addComponent(btnOut)))
+                        .addContainerGap(24, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,8 +327,10 @@ public class frmBooking extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTotalRegistries)
-                .addGap(21, 21, 21))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTotalRegistries)
+                    .addComponent(btnConsumptions))
+                .addGap(13, 13, 13))
         );
 
         jPanel1.setBackground(new java.awt.Color(0, 173, 181));
@@ -630,7 +647,7 @@ public class frmBooking extends javax.swing.JInternalFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -641,7 +658,7 @@ public class frmBooking extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -919,6 +936,19 @@ public class frmBooking extends javax.swing.JInternalFrame {
         frmCustomerView.setVisible(true);
     }//GEN-LAST:event_btnSearchCustomerActionPerformed
 
+    private void btnConsumptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsumptionsActionPerformed
+        int row = tableBookings.getSelectedRow();
+        frmConsumption.id_booking = tableBookings.getValueAt(row, 0)
+                .toString();
+        frmConsumption.customer = tableBookings.getValueAt(row, 4)
+                .toString();
+        
+        frmConsumption frmConsumption = new frmConsumption();
+        frmHome.desktop.add(frmConsumption);
+        frmConsumption.toFront();
+        frmConsumption.setVisible(true);
+    }//GEN-LAST:event_btnConsumptionsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -957,6 +987,7 @@ public class frmBooking extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnConsumptions;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnOut;
