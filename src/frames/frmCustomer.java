@@ -32,9 +32,9 @@ public class frmCustomer extends javax.swing.JInternalFrame {
      * Procedure that hides the ID column in the frame table.
      */
     void hideColumns() {
-        tableCustomers.getColumnModel().getColumn(0).setMaxWidth(0);
-        tableCustomers.getColumnModel().getColumn(0).setMinWidth(0);
-        tableCustomers.getColumnModel().getColumn(0)
+        table.getColumnModel().getColumn(0).setMaxWidth(0);
+        table.getColumnModel().getColumn(0).setMinWidth(0);
+        table.getColumnModel().getColumn(0)
                 .setPreferredWidth(0);
 
     }
@@ -105,7 +105,7 @@ public class frmCustomer extends javax.swing.JInternalFrame {
             CrudCustomer crudCustomer = new CrudCustomer();
             model = crudCustomer.findCustomer(search);
 
-            tableCustomers.setModel(model);
+            table.setModel(model);
             hideColumns();
             lblTotalRegistries.setText(
                     "Total registros: "
@@ -153,7 +153,7 @@ public class frmCustomer extends javax.swing.JInternalFrame {
         btnDelete = new javax.swing.JButton();
         btnOut = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tableCustomers = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         lblTotalRegistries = new javax.swing.JLabel();
 
         setClosable(true);
@@ -436,10 +436,10 @@ public class frmCustomer extends javax.swing.JInternalFrame {
             }
         });
 
-        tableCustomers.setBackground(new java.awt.Color(57, 62, 70));
-        tableCustomers.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tableCustomers.setForeground(new java.awt.Color(238, 238, 238));
-        tableCustomers.setModel(new javax.swing.table.DefaultTableModel(
+        table.setBackground(new java.awt.Color(57, 62, 70));
+        table.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        table.setForeground(new java.awt.Color(238, 238, 238));
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -450,14 +450,14 @@ public class frmCustomer extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tableCustomers.setSelectionBackground(new java.awt.Color(57, 62, 70));
-        tableCustomers.setSelectionForeground(new java.awt.Color(238, 238, 238));
-        tableCustomers.addMouseListener(new java.awt.event.MouseAdapter() {
+        table.setSelectionBackground(new java.awt.Color(57, 62, 70));
+        table.setSelectionForeground(new java.awt.Color(238, 238, 238));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableCustomersMouseClicked(evt);
+                tableMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tableCustomers);
+        jScrollPane3.setViewportView(table);
 
         lblTotalRegistries.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTotalRegistries.setForeground(new java.awt.Color(238, 238, 238));
@@ -695,31 +695,31 @@ public class frmCustomer extends javax.swing.JInternalFrame {
      * of the table containing information about a user is pressed.
      * @param evt A click on a row of the table.
      */
-    private void tableCustomersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCustomersMouseClicked
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         btnSave.setText("Editar");
         enableComponents();
         btnDelete.setEnabled(true);
         action = "editar";
 
-        int row = tableCustomers.rowAtPoint(evt.getPoint());
+        int row = table.rowAtPoint(evt.getPoint());
 
-        txtIdPerson.setText(tableCustomers.getValueAt(row, 0)
+        txtIdPerson.setText(table.getValueAt(row, 0)
             .toString());
-        txtCustomerName.setText(tableCustomers.getValueAt(row, 1)
+        txtCustomerName.setText(table.getValueAt(row, 1)
             .toString());
-        txtLastNames.setText(tableCustomers.getValueAt(row, 2)
+        txtLastNames.setText(table.getValueAt(row, 2)
             .toString());
-        txtNationalId.setText(tableCustomers.getValueAt(row, 3)
+        txtNationalId.setText(table.getValueAt(row, 3)
             .toString());
-        txtAddress.setText(tableCustomers.getValueAt(row, 4)
+        txtAddress.setText(table.getValueAt(row, 4)
             .toString());
-        txtPhone.setText(tableCustomers.getValueAt(row, 5)
+        txtPhone.setText(table.getValueAt(row, 5)
             .toString());
-        txtEmail.setText(tableCustomers.getValueAt(row, 6)
+        txtEmail.setText(table.getValueAt(row, 6)
             .toString());
-        txtCustomerId.setText(tableCustomers.getValueAt(row, 7)
+        txtCustomerId.setText(table.getValueAt(row, 7)
             .toString());
-    }//GEN-LAST:event_tableCustomersMouseClicked
+    }//GEN-LAST:event_tableMouseClicked
 
     /**
      * Procedure that allows the user to go directly to the next component by
@@ -836,7 +836,7 @@ public class frmCustomer extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblTotalRegistries;
-    private javax.swing.JTable tableCustomers;
+    private javax.swing.JTable table;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtCustomerId;
     private javax.swing.JTextField txtCustomerName;

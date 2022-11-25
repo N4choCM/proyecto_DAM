@@ -35,17 +35,17 @@ public class frmConsumption extends javax.swing.JInternalFrame {
      * Procedure that hides the ID column in the frame table.
      */
     void hideColumns() {
-        tableConsumptions.getColumnModel().getColumn(0).setMaxWidth(0);
-        tableConsumptions.getColumnModel().getColumn(0).setMinWidth(0);
-        tableConsumptions.getColumnModel().getColumn(0)
+        table.getColumnModel().getColumn(0).setMaxWidth(0);
+        table.getColumnModel().getColumn(0).setMinWidth(0);
+        table.getColumnModel().getColumn(0)
                 .setPreferredWidth(0);
-        tableConsumptions.getColumnModel().getColumn(1).setMaxWidth(0);
-        tableConsumptions.getColumnModel().getColumn(1).setMinWidth(0);
-        tableConsumptions.getColumnModel().getColumn(1)
+        table.getColumnModel().getColumn(1).setMaxWidth(0);
+        table.getColumnModel().getColumn(1).setMinWidth(0);
+        table.getColumnModel().getColumn(1)
                 .setPreferredWidth(0);
-        tableConsumptions.getColumnModel().getColumn(2).setMaxWidth(0);
-        tableConsumptions.getColumnModel().getColumn(2).setMinWidth(0);
-        tableConsumptions.getColumnModel().getColumn(2)
+        table.getColumnModel().getColumn(2).setMaxWidth(0);
+        table.getColumnModel().getColumn(2).setMinWidth(0);
+        table.getColumnModel().getColumn(2)
                 .setPreferredWidth(0);
 
     }
@@ -113,7 +113,7 @@ public class frmConsumption extends javax.swing.JInternalFrame {
             CrudConsumption crudConsumption = new CrudConsumption();
             model = crudConsumption.findConsumption(search);
 
-            tableConsumptions.setModel(model);
+            table.setModel(model);
             hideColumns();
             lblTotalRegistries.setText("Total registros: "
                     + Integer.toString(crudConsumption.totalRegistries)
@@ -158,7 +158,7 @@ public class frmConsumption extends javax.swing.JInternalFrame {
         btnDelete = new javax.swing.JButton();
         btnOut = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tableConsumptions = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         lblTotalRegistries = new javax.swing.JLabel();
         lblTotalAmount = new javax.swing.JLabel();
 
@@ -410,10 +410,10 @@ public class frmConsumption extends javax.swing.JInternalFrame {
             }
         });
 
-        tableConsumptions.setBackground(new java.awt.Color(57, 62, 70));
-        tableConsumptions.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tableConsumptions.setForeground(new java.awt.Color(238, 238, 238));
-        tableConsumptions.setModel(new javax.swing.table.DefaultTableModel(
+        table.setBackground(new java.awt.Color(57, 62, 70));
+        table.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        table.setForeground(new java.awt.Color(238, 238, 238));
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -424,14 +424,17 @@ public class frmConsumption extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tableConsumptions.setSelectionBackground(new java.awt.Color(57, 62, 70));
-        tableConsumptions.setSelectionForeground(new java.awt.Color(238, 238, 238));
-        tableConsumptions.addMouseListener(new java.awt.event.MouseAdapter() {
+        table.setSelectionBackground(new java.awt.Color(57, 62, 70));
+        table.setSelectionForeground(new java.awt.Color(238, 238, 238));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableConsumptionsMouseClicked(evt);
+                tableMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tableMousePressed(evt);
             }
         });
-        jScrollPane3.setViewportView(tableConsumptions);
+        jScrollPane3.setViewportView(table);
 
         lblTotalRegistries.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTotalRegistries.setForeground(new java.awt.Color(238, 238, 238));
@@ -568,9 +571,9 @@ public class frmConsumption extends javax.swing.JInternalFrame {
             if (crudConsumption.create(consumption)) {
                 JOptionPane.showMessageDialog(
                         rootPane,
-                        "Se registró el consumo" + txtProduct.getText() + " del "
+                        "Se registró el consumo " + txtProduct.getText() + " del "
                                 + "cliente " + txtCustomer.getText() 
-                                + "satisfactoriamente."
+                                + " satisfactoriamente."
                 );
                 findConsumption(id_booking);
                 disableComponents();
@@ -627,26 +630,26 @@ public class frmConsumption extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btnOutActionPerformed
 
-    private void tableConsumptionsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableConsumptionsMouseClicked
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         btnSave.setText("Editar");
         enableComponents();
         btnDelete.setEnabled(true);
         action = "editar";
 
-        int row = tableConsumptions.rowAtPoint(evt.getPoint());
+        int row = table.rowAtPoint(evt.getPoint());
 
-        txtIdConsumption.setText(tableConsumptions.getValueAt(row, 0)
+        txtIdConsumption.setText(table.getValueAt(row, 0)
                 .toString());
-        txtIdBooking.setText(tableConsumptions.getValueAt(row, 1)
+        txtIdBooking.setText(table.getValueAt(row, 1)
                 .toString());
-        txtProductId.setText(tableConsumptions.getValueAt(row, 2)
+        txtProductId.setText(table.getValueAt(row, 2)
                 .toString());
-        txtProduct.setText(tableConsumptions.getValueAt(row, 3).toString());
-        txtAmount.setText(tableConsumptions.getValueAt(row, 4).toString());
-        txtPvp.setText(tableConsumptions.getValueAt(row, 5).toString());
-        cbStatus.setSelectedItem(tableConsumptions
+        txtProduct.setText(table.getValueAt(row, 3).toString());
+        txtAmount.setText(table.getValueAt(row, 4).toString());
+        txtPvp.setText(table.getValueAt(row, 5).toString());
+        cbStatus.setSelectedItem(table
                 .getValueAt(row, 6).toString());
-    }//GEN-LAST:event_tableConsumptionsMouseClicked
+    }//GEN-LAST:event_tableMouseClicked
 
     private void txtCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustomerActionPerformed
         // TODO add your handling code here:
@@ -669,6 +672,10 @@ public class frmConsumption extends javax.swing.JInternalFrame {
     private void txtAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmountActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAmountActionPerformed
+
+    private void tableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tableMousePressed
 
     /**
      * @param args the command line arguments
@@ -724,7 +731,7 @@ public class frmConsumption extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblTotalAmount;
     private javax.swing.JLabel lblTotalRegistries;
-    private javax.swing.JTable tableConsumptions;
+    private javax.swing.JTable table;
     private javax.swing.JTextField txtAmount;
     private javax.swing.JTextField txtCustomer;
     private javax.swing.JTextField txtIdBooking;

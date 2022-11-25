@@ -33,9 +33,9 @@ public class frmEmployee extends javax.swing.JInternalFrame {
      * Procedure that hides the ID column in the frame table.
      */
     void hideColumns() {
-        tableEmployees.getColumnModel().getColumn(0).setMaxWidth(0);
-        tableEmployees.getColumnModel().getColumn(0).setMinWidth(0);
-        tableEmployees.getColumnModel().getColumn(0)
+        table.getColumnModel().getColumn(0).setMaxWidth(0);
+        table.getColumnModel().getColumn(0).setMinWidth(0);
+        table.getColumnModel().getColumn(0)
                 .setPreferredWidth(0);
 
     }
@@ -119,7 +119,7 @@ public class frmEmployee extends javax.swing.JInternalFrame {
             CrudEmployee crudEmployee = new CrudEmployee();
             model = crudEmployee.findEmployee(search);
 
-            tableEmployees.setModel(model);
+            table.setModel(model);
             hideColumns();
             lblTotalRegistries.setText(
                     "Total registros: "
@@ -175,7 +175,7 @@ public class frmEmployee extends javax.swing.JInternalFrame {
         btnDelete = new javax.swing.JButton();
         btnOut = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tableEmployees = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         lblTotalRegistries = new javax.swing.JLabel();
 
         setClosable(true);
@@ -517,10 +517,10 @@ public class frmEmployee extends javax.swing.JInternalFrame {
             }
         });
 
-        tableEmployees.setBackground(new java.awt.Color(57, 62, 70));
-        tableEmployees.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tableEmployees.setForeground(new java.awt.Color(238, 238, 238));
-        tableEmployees.setModel(new javax.swing.table.DefaultTableModel(
+        table.setBackground(new java.awt.Color(57, 62, 70));
+        table.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        table.setForeground(new java.awt.Color(238, 238, 238));
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -531,14 +531,14 @@ public class frmEmployee extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tableEmployees.setSelectionBackground(new java.awt.Color(57, 62, 70));
-        tableEmployees.setSelectionForeground(new java.awt.Color(238, 238, 238));
-        tableEmployees.addMouseListener(new java.awt.event.MouseAdapter() {
+        table.setSelectionBackground(new java.awt.Color(57, 62, 70));
+        table.setSelectionForeground(new java.awt.Color(238, 238, 238));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableEmployeesMouseClicked(evt);
+                tableMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tableEmployees);
+        jScrollPane3.setViewportView(table);
 
         lblTotalRegistries.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTotalRegistries.setForeground(new java.awt.Color(238, 238, 238));
@@ -800,39 +800,39 @@ public class frmEmployee extends javax.swing.JInternalFrame {
      * @param evt A click on the row of the table whose employee is going to be
      * updated.
      */
-    private void tableEmployeesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableEmployeesMouseClicked
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         btnSave.setText("Editar");
         enableComponents();
         btnDelete.setEnabled(true);
         action = "editar";
 
-        int row = tableEmployees.rowAtPoint(evt.getPoint());
+        int row = table.rowAtPoint(evt.getPoint());
 
-        txtIdPerson.setText(tableEmployees.getValueAt(row, 0)
+        txtIdPerson.setText(table.getValueAt(row, 0)
                 .toString());
-        txtEmployeeName.setText(tableEmployees.getValueAt(row, 1)
+        txtEmployeeName.setText(table.getValueAt(row, 1)
                 .toString());
-        txtLastNames.setText(tableEmployees.getValueAt(row, 2)
+        txtLastNames.setText(table.getValueAt(row, 2)
                 .toString());
-        txtNationalId.setText(tableEmployees.getValueAt(row, 3)
+        txtNationalId.setText(table.getValueAt(row, 3)
                 .toString());
-        txtAddress.setText(tableEmployees.getValueAt(row, 4)
+        txtAddress.setText(table.getValueAt(row, 4)
                 .toString());
-        txtPhone.setText(tableEmployees.getValueAt(row, 5)
+        txtPhone.setText(table.getValueAt(row, 5)
                 .toString());
-        txtEmail.setText(tableEmployees.getValueAt(row, 6)
+        txtEmail.setText(table.getValueAt(row, 6)
                 .toString());
-        txtSalary.setText(tableEmployees.getValueAt(row, 7)
+        txtSalary.setText(table.getValueAt(row, 7)
                 .toString());
-        cbAccess.setSelectedItem(tableEmployees.getValueAt(row, 8)
+        cbAccess.setSelectedItem(table.getValueAt(row, 8)
                 .toString());
-        txtLogin.setText(tableEmployees.getValueAt(row, 9)
+        txtLogin.setText(table.getValueAt(row, 9)
                 .toString());
-        txtPassword.setText(tableEmployees.getValueAt(row, 10)
+        txtPassword.setText(table.getValueAt(row, 10)
                 .toString());
-        cbStatus.setSelectedItem(tableEmployees.getValueAt(row, 11)
+        cbStatus.setSelectedItem(table.getValueAt(row, 11)
                 .toString());
-    }//GEN-LAST:event_tableEmployeesMouseClicked
+    }//GEN-LAST:event_tableMouseClicked
 
     /**
      * Procedure that allows the user to go directly to the next component by
@@ -958,7 +958,7 @@ public class frmEmployee extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblTotalRegistries;
-    private javax.swing.JTable tableEmployees;
+    private javax.swing.JTable table;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEmployeeName;

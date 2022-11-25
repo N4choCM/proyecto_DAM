@@ -27,9 +27,9 @@ public class frmProductsView extends javax.swing.JFrame {
      * Procedure that hides the ID column in the frame table.
      */
     void hideColumns() {
-        tableProducts.getColumnModel().getColumn(0).setMaxWidth(0);
-        tableProducts.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProducts.getColumnModel().getColumn(0)
+        table.getColumnModel().getColumn(0).setMaxWidth(0);
+        table.getColumnModel().getColumn(0).setMinWidth(0);
+        table.getColumnModel().getColumn(0)
                 .setPreferredWidth(0);
 
     }
@@ -46,7 +46,7 @@ public class frmProductsView extends javax.swing.JFrame {
             CrudProduct crudProduct = new CrudProduct();
             model = crudProduct.findByProductName(search);
 
-            tableProducts.setModel(model);
+            table.setModel(model);
             hideColumns();
             lblTotalRegistries.setText(
                     "Total registros: "
@@ -73,7 +73,7 @@ public class frmProductsView extends javax.swing.JFrame {
         btnSearch = new javax.swing.JButton();
         btnOut = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tableProducts = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         lblTotalRegistries = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -110,10 +110,10 @@ public class frmProductsView extends javax.swing.JFrame {
             }
         });
 
-        tableProducts.setBackground(new java.awt.Color(57, 62, 70));
-        tableProducts.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tableProducts.setForeground(new java.awt.Color(238, 238, 238));
-        tableProducts.setModel(new javax.swing.table.DefaultTableModel(
+        table.setBackground(new java.awt.Color(57, 62, 70));
+        table.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        table.setForeground(new java.awt.Color(238, 238, 238));
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -124,17 +124,17 @@ public class frmProductsView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tableProducts.setSelectionBackground(new java.awt.Color(57, 62, 70));
-        tableProducts.setSelectionForeground(new java.awt.Color(238, 238, 238));
-        tableProducts.addMouseListener(new java.awt.event.MouseAdapter() {
+        table.setSelectionBackground(new java.awt.Color(57, 62, 70));
+        table.setSelectionForeground(new java.awt.Color(238, 238, 238));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableProductsMouseClicked(evt);
+                tableMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tableProductsMousePressed(evt);
+                tableMousePressed(evt);
             }
         });
-        jScrollPane3.setViewportView(tableProducts);
+        jScrollPane3.setViewportView(table);
 
         lblTotalRegistries.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTotalRegistries.setForeground(new java.awt.Color(238, 238, 238));
@@ -206,18 +206,18 @@ public class frmProductsView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnOutActionPerformed
 
-    private void tableProductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductsMouseClicked
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         
-    }//GEN-LAST:event_tableProductsMouseClicked
+    }//GEN-LAST:event_tableMouseClicked
 
-    private void tableProductsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductsMousePressed
+    private void tableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMousePressed
         if(evt.getClickCount() == 2){
-            int row = tableProducts.getSelectedRow();
+            int row = table.getSelectedRow();
             String code, value1, value2;
             
-            code = tableProducts.getValueAt(row, 0).toString();
-            value1 = tableProducts.getValueAt(row, 1).toString();
-            value2 = tableProducts.getValueAt(row, 3).toString();
+            code = table.getValueAt(row, 0).toString();
+            value1 = table.getValueAt(row, 1).toString();
+            value2 = table.getValueAt(row, 3).toString();
             
             frmConsumption.txtProductId.setText(code);
             frmConsumption.txtProduct.setText(value1);
@@ -225,7 +225,7 @@ public class frmProductsView extends javax.swing.JFrame {
             
             this.setVisible(false);
         }
-    }//GEN-LAST:event_tableProductsMousePressed
+    }//GEN-LAST:event_tableMousePressed
 
     /**
      * @param args the command line arguments
@@ -269,7 +269,7 @@ public class frmProductsView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblTotalRegistries;
-    private javax.swing.JTable tableProducts;
+    private javax.swing.JTable table;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

@@ -24,9 +24,9 @@ public class frmCustomerView extends javax.swing.JFrame {
     }
     
      void hideColumns() {
-        tableCustomers.getColumnModel().getColumn(0).setMaxWidth(0);
-        tableCustomers.getColumnModel().getColumn(0).setMinWidth(0);
-        tableCustomers.getColumnModel().getColumn(0)
+        table.getColumnModel().getColumn(0).setMaxWidth(0);
+        table.getColumnModel().getColumn(0).setMinWidth(0);
+        table.getColumnModel().getColumn(0)
                 .setPreferredWidth(0);
 
     }
@@ -43,7 +43,7 @@ public class frmCustomerView extends javax.swing.JFrame {
             CrudCustomer crudCustomer = new CrudCustomer();
             model = crudCustomer.findCustomer(search);
 
-            tableCustomers.setModel(model);
+            table.setModel(model);
             hideColumns();
             lblTotalRegistries.setText(
                     "Total registros: "
@@ -69,7 +69,7 @@ public class frmCustomerView extends javax.swing.JFrame {
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tableCustomers = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         lblTotalRegistries = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -95,10 +95,10 @@ public class frmCustomerView extends javax.swing.JFrame {
             }
         });
 
-        tableCustomers.setBackground(new java.awt.Color(57, 62, 70));
-        tableCustomers.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tableCustomers.setForeground(new java.awt.Color(238, 238, 238));
-        tableCustomers.setModel(new javax.swing.table.DefaultTableModel(
+        table.setBackground(new java.awt.Color(57, 62, 70));
+        table.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        table.setForeground(new java.awt.Color(238, 238, 238));
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -109,17 +109,17 @@ public class frmCustomerView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tableCustomers.setSelectionBackground(new java.awt.Color(57, 62, 70));
-        tableCustomers.setSelectionForeground(new java.awt.Color(238, 238, 238));
-        tableCustomers.addMouseListener(new java.awt.event.MouseAdapter() {
+        table.setSelectionBackground(new java.awt.Color(57, 62, 70));
+        table.setSelectionForeground(new java.awt.Color(238, 238, 238));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableCustomersMouseClicked(evt);
+                tableMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tableCustomersMousePressed(evt);
+                tableMousePressed(evt);
             }
         });
-        jScrollPane3.setViewportView(tableCustomers);
+        jScrollPane3.setViewportView(table);
 
         lblTotalRegistries.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTotalRegistries.setForeground(new java.awt.Color(238, 238, 238));
@@ -187,25 +187,25 @@ public class frmCustomerView extends javax.swing.JFrame {
         findCustomers(txtSearch.getText());
     }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void tableCustomersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCustomersMouseClicked
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         
-    }//GEN-LAST:event_tableCustomersMouseClicked
+    }//GEN-LAST:event_tableMouseClicked
 
-    private void tableCustomersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCustomersMousePressed
+    private void tableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMousePressed
         if(evt.getClickCount() == 2){
-            int row = tableCustomers.getSelectedRow();
+            int row = table.getSelectedRow();
             String code;
             String value;
             
-            code = tableCustomers.getValueAt(row, 0).toString();
-            value = tableCustomers.getValueAt(row, 1).toString() + " " + 
-                    tableCustomers.getValueAt(row, 2).toString();
+            code = table.getValueAt(row, 0).toString();
+            value = table.getValueAt(row, 1).toString() + " " + 
+                    table.getValueAt(row, 2).toString();
             
             frmBooking.txtIdCustomer.setText(code);
             frmBooking.txtCustomerName.setText(value);
             this.dispose();
         }
-    }//GEN-LAST:event_tableCustomersMousePressed
+    }//GEN-LAST:event_tableMousePressed
 
     /**
      * @param args the command line arguments
@@ -248,7 +248,7 @@ public class frmCustomerView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblTotalRegistries;
-    private javax.swing.JTable tableCustomers;
+    private javax.swing.JTable table;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

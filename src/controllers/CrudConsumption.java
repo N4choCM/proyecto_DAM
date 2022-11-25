@@ -48,8 +48,8 @@ public class CrudConsumption {
         
         sSql = "SELECT c.id_consumption, c.id_booking, c.id_product, p.name, "
                 + "c.amount, c.price, c.status FROM consumption c INNER JOIN "
-                + "product p ON c.id_product = p.id_product WHERE c.id_booking = "
-                + "'%" + search + "%' ORDER BY c.id_consumption DESC";
+                + "product p ON c.id_product = p.id_product WHERE c.id_booking = " 
+                + search + " ORDER BY c.id_consumption DESC";
         
         try{
             Statement statement = connection.createStatement();

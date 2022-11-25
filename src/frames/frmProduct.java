@@ -31,9 +31,9 @@ public class frmProduct extends javax.swing.JInternalFrame {
      * Procedure that hides the ID column in the frame table.
      */
     void hideColumns() {
-        tableProducts.getColumnModel().getColumn(0).setMaxWidth(0);
-        tableProducts.getColumnModel().getColumn(0).setMinWidth(0);
-        tableProducts.getColumnModel().getColumn(0)
+        table.getColumnModel().getColumn(0).setMaxWidth(0);
+        table.getColumnModel().getColumn(0).setMinWidth(0);
+        table.getColumnModel().getColumn(0)
                 .setPreferredWidth(0);
 
     }
@@ -90,7 +90,7 @@ public class frmProduct extends javax.swing.JInternalFrame {
             CrudProduct crudProduct = new CrudProduct();
             model = crudProduct.findByProductName(search);
 
-            tableProducts.setModel(model);
+            table.setModel(model);
             hideColumns();
             lblTotalRegistries.setText(
                     "Total registros: "
@@ -119,7 +119,7 @@ public class frmProduct extends javax.swing.JInternalFrame {
         btnDelete = new javax.swing.JButton();
         btnOut = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tableProducts = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         lblTotalRegistries = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txtIdProduct = new javax.swing.JTextField();
@@ -190,10 +190,10 @@ public class frmProduct extends javax.swing.JInternalFrame {
             }
         });
 
-        tableProducts.setBackground(new java.awt.Color(57, 62, 70));
-        tableProducts.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tableProducts.setForeground(new java.awt.Color(238, 238, 238));
-        tableProducts.setModel(new javax.swing.table.DefaultTableModel(
+        table.setBackground(new java.awt.Color(57, 62, 70));
+        table.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        table.setForeground(new java.awt.Color(238, 238, 238));
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -204,14 +204,14 @@ public class frmProduct extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tableProducts.setSelectionBackground(new java.awt.Color(57, 62, 70));
-        tableProducts.setSelectionForeground(new java.awt.Color(238, 238, 238));
-        tableProducts.addMouseListener(new java.awt.event.MouseAdapter() {
+        table.setSelectionBackground(new java.awt.Color(57, 62, 70));
+        table.setSelectionForeground(new java.awt.Color(238, 238, 238));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableProductsMouseClicked(evt);
+                tableMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tableProducts);
+        jScrollPane3.setViewportView(table);
 
         lblTotalRegistries.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTotalRegistries.setForeground(new java.awt.Color(238, 238, 238));
@@ -500,24 +500,24 @@ public class frmProduct extends javax.swing.JInternalFrame {
      * registry of this Product is clicked with the mouse on the table.
      * @param evt A click on a row of the table.
      */
-    private void tableProductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductsMouseClicked
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         btnSave.setText("Editar");
         enableComponents();
         btnDelete.setEnabled(true);
         action = "editar";
 
-        int row = tableProducts.rowAtPoint(evt.getPoint());
+        int row = table.rowAtPoint(evt.getPoint());
 
-        txtIdProduct.setText(tableProducts.getValueAt(row, 0)
+        txtIdProduct.setText(table.getValueAt(row, 0)
                 .toString());
-        txtProductName.setText(tableProducts.getValueAt(row, 1)
+        txtProductName.setText(table.getValueAt(row, 1)
                 .toString());
-        txtProductDescription.setText(tableProducts.getValueAt(row, 2)
+        txtProductDescription.setText(table.getValueAt(row, 2)
                 .toString());
-        txtPvp.setText(tableProducts.getValueAt(row, 3).toString());
-        cbUnitMeasure.setSelectedItem(tableProducts
+        txtPvp.setText(table.getValueAt(row, 3).toString());
+        cbUnitMeasure.setSelectedItem(table
                 .getValueAt(row, 4).toString());
-    }//GEN-LAST:event_tableProductsMouseClicked
+    }//GEN-LAST:event_tableMouseClicked
 
     private void txtIdProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdProductActionPerformed
         // TODO add your handling code here:
@@ -689,7 +689,7 @@ public class frmProduct extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblTotalRegistries;
-    private javax.swing.JTable tableProducts;
+    private javax.swing.JTable table;
     private javax.swing.JTextField txtIdProduct;
     private javax.swing.JTextArea txtProductDescription;
     private javax.swing.JTextField txtProductName;
