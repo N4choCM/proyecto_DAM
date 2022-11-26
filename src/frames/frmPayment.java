@@ -4,8 +4,16 @@
  */
 package frames;
 
+import controllers.CrudApartment;
+import controllers.CrudBooking;
 import controllers.CrudConsumption;
+import controllers.CrudPayment;
 import controllers.CrudProduct;
+import entity.Apartment;
+import entity.Booking;
+import entity.Payment;
+import java.util.Calendar;
+import java.sql.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author nacho
  */
-public class frmPayment extends javax.swing.JFrame {
+public class frmPayment extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frmPayment
@@ -27,15 +35,15 @@ public class frmPayment extends javax.swing.JFrame {
         txtApartment.setText(apartment);
         txtIdApartment.setText(id_apartment);
         txtBookingPrice.setText(Double.toString(booking_price));
-        
+
         CrudConsumption crudConsumption = new CrudConsumption();
         crudConsumption.findConsumption(id_booking);
         txtTotalPrice.setText(Double.toString(
                 booking_price + crudConsumption.totalConsumption
         ));
-        
+
     }
-    
+
     private String action = "guardar";
     public static String id_booking;
     public static String customer;
@@ -57,7 +65,7 @@ public class frmPayment extends javax.swing.JFrame {
                 .setPreferredWidth(0);
 
     }
-    
+
     void hideConsumptionCColumns() {
         tableConsumptions.getColumnModel().getColumn(0).setMaxWidth(0);
         tableConsumptions.getColumnModel().getColumn(0).setMinWidth(0);
@@ -81,17 +89,24 @@ public class frmPayment extends javax.swing.JFrame {
     void disableComponents() {
         txtIdPayment.setVisible(false);
         txtIdBooking.setEnabled(false);
-        txtProductDescription.setEnabled(false);
-        txtPvp.setEnabled(false);
-        cbUnitMeasure.setEnabled(false);
+        txtCustomer.setEnabled(false);
+        txtInvoiceNumber.setEnabled(false);
+        txtVat.setEnabled(false);
+        txtTotalPrice.setEnabled(false);
+        txtBookingPrice.setEnabled(false);
+        dcIssueDate.setEnabled(false);
+        dcPaymentDate.setEnabled(false);
+
+        txtIdApartment.setEnabled(false);
+        txtApartment.setEnabled(false);
 
         btnSave.setEnabled(false);
         btnCancel.setEnabled(false);
         btnDelete.setEnabled(false);
         txtIdPayment.setText("");
-        txtPvp.setText("");
-        txtIdBooking.setText("");
-        txtProductDescription.setText("");
+        txtInvoiceNumber.setText("");
+        txtVat.setText("");
+        txtTotalPrice.setText("");
     }
 
     /**
@@ -101,37 +116,57 @@ public class frmPayment extends javax.swing.JFrame {
     void enableComponents() {
         txtIdPayment.setVisible(false);
         txtIdBooking.setEnabled(true);
-        txtProductDescription.setEnabled(true);
-        txtPvp.setEnabled(true);
-        cbUnitMeasure.setEnabled(true);
+        txtCustomer.setEnabled(true);
+        txtInvoiceNumber.setEnabled(true);
+        txtVat.setEnabled(true);
+        txtTotalPrice.setEnabled(true);
+        txtBookingPrice.setEnabled(true);
+        dcIssueDate.setEnabled(true);
+        dcPaymentDate.setEnabled(true);
+
+        txtIdApartment.setEnabled(true);
+        txtApartment.setEnabled(true);
 
         btnSave.setEnabled(true);
         btnCancel.setEnabled(true);
         btnDelete.setEnabled(true);
         txtIdPayment.setText("");
-        txtPvp.setText("");
-        txtIdBooking.setText("");
-        txtProductDescription.setText("");
+        txtInvoiceNumber.setText("");
+        txtVat.setText("");
+        //txtTotalPrice.setText("");
     }
 
     /**
      * Procedure that finds Products by their name field. It also shows the
      * total number of Products registered in the DB.
+     *
      * @param search The product name data to be found in the DB entries.
      */
     void findPayment(String search) {
 
         try {
             DefaultTableModel model;
-            CrudProduct crudProduct = new CrudProduct();
-            model = crudProduct.findByProductName(search);
+            CrudPayment crudPayment = new CrudPayment();
+            model = crudPayment.findPayment(search);
 
-            tableConsumptions.setModel(model);
+            table.setModel(model);
             hideColumns();
             lblTotalRegistries.setText(
-                    "Total registros: "
-                    + Integer.toString(crudProduct.totalRegistries)
+                    "Total pagos: "
+                    + Integer.toString(crudPayment.totalRegistries)
             );
+
+            //MOSTRAR DATOS DE CONSUMOS
+            CrudConsumption crudConsumption = new CrudConsumption();
+            model = crudConsumption.findConsumption(search);
+            tableConsumptions.setModel(model);
+            hideConsumptionCColumns();
+
+            lblTotalRegistries.setText("Total consumos: "
+                    + crudConsumption.totalRegistries);
+            lblTotalConsumption.setText("Consumo total: "
+                    + crudConsumption.totalConsumption + "€");
+
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(rootPane, e);
         }
@@ -177,16 +212,17 @@ public class frmPayment extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         dcPaymentDate = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        txtSearch1 = new javax.swing.JTextField();
-        btnSearch1 = new javax.swing.JButton();
-        btnDelete1 = new javax.swing.JButton();
-        btnOut1 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnOut = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         lblTotalRegistries1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(57, 62, 70));
@@ -224,7 +260,7 @@ public class frmPayment extends javax.swing.JFrame {
 
         lblTotalConsumption.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTotalConsumption.setForeground(new java.awt.Color(238, 238, 238));
-        lblTotalConsumption.setText("Total ");
+        lblTotalConsumption.setText("Total: ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -240,7 +276,7 @@ public class frmPayment extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,7 +319,7 @@ public class frmPayment extends javax.swing.JFrame {
         btnNew.setBackground(new java.awt.Color(57, 62, 70));
         btnNew.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnNew.setForeground(new java.awt.Color(238, 238, 238));
-        btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/lista-de-verificacion.png"))); // NOI18N
+        btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/bolsa-de-dinero (2).png"))); // NOI18N
         btnNew.setText("Nuevo");
         btnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -423,7 +459,7 @@ public class frmPayment extends javax.swing.JFrame {
                             .addComponent(btnNew)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnSave)
-                            .addGap(26, 26, 26)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(btnCancel))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(8, 8, 8)
@@ -522,43 +558,25 @@ public class frmPayment extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(0, 173, 181));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de pagos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18), new java.awt.Color(238, 238, 238))); // NOI18N
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(238, 238, 238));
-        jLabel14.setText("Buscar:");
-
-        txtSearch1.setBackground(new java.awt.Color(238, 238, 238));
-        txtSearch1.setForeground(new java.awt.Color(57, 62, 70));
-
-        btnSearch1.setBackground(new java.awt.Color(57, 62, 70));
-        btnSearch1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnSearch1.setForeground(new java.awt.Color(238, 238, 238));
-        btnSearch1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/buscar (1).png"))); // NOI18N
-        btnSearch1.setText("Buscar");
-        btnSearch1.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setBackground(new java.awt.Color(57, 62, 70));
+        btnDelete.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(238, 238, 238));
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/basura.png"))); // NOI18N
+        btnDelete.setText("Eliminar");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearch1ActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
-        btnDelete1.setBackground(new java.awt.Color(57, 62, 70));
-        btnDelete1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnDelete1.setForeground(new java.awt.Color(238, 238, 238));
-        btnDelete1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/basura.png"))); // NOI18N
-        btnDelete1.setText("Eliminar");
-        btnDelete1.addActionListener(new java.awt.event.ActionListener() {
+        btnOut.setBackground(new java.awt.Color(57, 62, 70));
+        btnOut.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnOut.setForeground(new java.awt.Color(238, 238, 238));
+        btnOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/cerrar-sesion (3).png"))); // NOI18N
+        btnOut.setText("Salir");
+        btnOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelete1ActionPerformed(evt);
-            }
-        });
-
-        btnOut1.setBackground(new java.awt.Color(57, 62, 70));
-        btnOut1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnOut1.setForeground(new java.awt.Color(238, 238, 238));
-        btnOut1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/cerrar-sesion (3).png"))); // NOI18N
-        btnOut1.setText("Salir");
-        btnOut1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOut1ActionPerformed(evt);
+                btnOutActionPerformed(evt);
             }
         });
 
@@ -594,20 +612,15 @@ public class frmPayment extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(42, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSearch1)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(59, 59, 59)
+                                .addComponent(btnDelete)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnDelete1)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnOut1))
+                                .addComponent(btnOut))
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(37, 37, 37))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -619,24 +632,21 @@ public class frmPayment extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(txtSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch1)
-                    .addComponent(btnDelete1)
-                    .addComponent(btnOut1))
+                    .addComponent(btnDelete)
+                    .addComponent(btnOut))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTotalRegistries1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
@@ -644,13 +654,13 @@ public class frmPayment extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -658,8 +668,8 @@ public class frmPayment extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -674,14 +684,9 @@ public class frmPayment extends javax.swing.JFrame {
         int row = tableConsumptions.rowAtPoint(evt.getPoint());
 
         txtIdPayment.setText(tableConsumptions.getValueAt(row, 0)
-            .toString());
+                .toString());
         txtIdBooking.setText(tableConsumptions.getValueAt(row, 1)
-            .toString());
-        txtProductDescription.setText(tableConsumptions.getValueAt(row, 2)
-            .toString());
-        txtPvp.setText(tableConsumptions.getValueAt(row, 3).toString());
-        cbUnitMeasure.setSelectedItem(tableConsumptions
-            .getValueAt(row, 4).toString());
+                .toString());
     }//GEN-LAST:event_tableConsumptionsMouseClicked
 
     private void txtIdPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdPaymentActionPerformed
@@ -699,63 +704,91 @@ public class frmPayment extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        if (txtIdBooking.getText().length() == 0) {
+        if (txtVat.getText().length() == 0) {
             JOptionPane.showConfirmDialog(
-                rootPane,
-                "Por favor, introduzca el nombre del producto."
+                    rootPane,
+                    "Por favor, introduzca el IVA."
             );
-            txtIdBooking.requestFocus();
+            txtVat.requestFocus();
             return;
         }
-        if (txtProductDescription.getText().length() == 0) {
+        if (txtTotalPrice.getText().length() == 0) {
             JOptionPane.showConfirmDialog(
-                rootPane,
-                "Por favor, introduzca la descripción "
-                + "del producto."
+                    rootPane,
+                    "Por favor, introduzca el total del pago."
             );
-            txtProductDescription.requestFocus();
+            txtTotalPrice.requestFocus();
             return;
         }
-        if (txtPvp.getText().length() == 0) {
+        if (txtInvoiceNumber.getText().length() == 0) {
             JOptionPane.showConfirmDialog(
-                rootPane,
-                "Por favor, introduzca el PVP del producto."
+                    rootPane,
+                    "Por favor, introduzca el número de la factura."
             );
-            txtPvp.requestFocus();
+            txtInvoiceNumber.requestFocus();
             return;
         }
 
-        Product product = new Product();
-        CrudProduct crudProduct = new CrudProduct();
+        Payment payment = new Payment();
+        CrudPayment crudPayment = new CrudPayment();
 
-        product.setName(txtIdBooking.getText());
-        product.setDescription(txtProductDescription.getText());
-        product.setPrice(Double.parseDouble(txtPvp.getText()));
-        int selectedItem = cbUnitMeasure.getSelectedIndex();
-        product.setUnit_measure((String) cbUnitMeasure
-            .getItemAt(selectedItem));
+        payment.setId_booking(Integer.parseInt(txtIdBooking.getText()));
+        payment.setInvoice_number(txtInvoiceNumber.getText());
+        payment.setVat(Double.parseDouble(txtVat.getText()));
+        payment.setTotal_payment(Double.parseDouble(txtTotalPrice.getText()));
+
+        Calendar calendar;
+        int d, m, y;
+
+        calendar = dcPaymentDate.getCalendar();
+        d = calendar.get(Calendar.DAY_OF_MONTH);
+        m = calendar.get(Calendar.MONTH);
+        y = calendar.get(Calendar.YEAR) - 1900;
+
+        payment.setPayment_date(new Date(y, m, d));
+
+        calendar = dcIssueDate.getCalendar();
+        d = calendar.get(Calendar.DAY_OF_MONTH);
+        m = calendar.get(Calendar.MONTH);
+        y = calendar.get(Calendar.YEAR) - 1900;
+
+        payment.setIssue_date(new Date(y, m, d));
 
         if (action.equals("guardar")) {
-            if (crudProduct.create(product)) {
+            if (crudPayment.create(payment)) {
                 JOptionPane.showMessageDialog(
-                    rootPane,
-                    "Se registró el producto satisfactoriamente."
+                        rootPane,
+                        "Se registró el pago de " + txtTotalPrice.getText() + "€ del cliente "
+                        + txtCustomer.getText() + " satisfactoriamente."
                 );
-                findPayment("");
+                findPayment(id_booking);
                 disableComponents();
+
+                //DESOCUPAR HABITACIÓN
+                CrudApartment crudApartment = new CrudApartment();
+                Apartment apartment = new Apartment();
+                apartment.setId_room(Integer.parseInt(txtIdApartment.getText()));
+                crudApartment.freeApartment(apartment);
+
+                //CANCELAR O PAGAR RESERVA
+                CrudBooking crudBooking = new CrudBooking();
+                Booking booking = new Booking();
+                booking.setId_booking(Integer.parseInt(txtIdBooking.getText()));
+                crudBooking.pay(booking);
 
             }
         } else if (action.equals("editar")) {
-            product.setId_product(Integer.parseInt(
-                txtIdPayment.getText()
+            payment.setId_payment(Integer.parseInt(
+                    txtIdPayment.getText()
             ));
 
-            if (crudProduct.update(product)) {
+            if (crudPayment.update(payment)) {
                 JOptionPane.showMessageDialog(
-                    rootPane,
-                    "Se actualizó el producto satisfactoriamente."
+                        rootPane,
+                        "Se actualizó el pago del cliente " + txtCustomer.getText()
+                        + " satisfactoriamente."
                 );
-                findPayment("");
+                findPayment(id_booking);
                 disableComponents();
 
             }
@@ -794,20 +827,51 @@ public class frmPayment extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTotalPriceActionPerformed
 
-    private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSearch1ActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        if (!txtIdPayment.getText().equals("")) {
+            int confirmation = JOptionPane.showConfirmDialog(
+                    rootPane,
+                    "¿Está seguro de eliminar el pago?",
+                    "Confirmar",
+                    2
+            );
 
-    private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDelete1ActionPerformed
+            if (confirmation == 0) {
+                CrudPayment crudPayment = new CrudPayment();
+                Payment payment = new Payment();
 
-    private void btnOut1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOut1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnOut1ActionPerformed
+                payment.setId_payment(
+                        Integer.parseInt(
+                                txtIdPayment.getText()
+                        ));
+                crudPayment.delete(payment);
+                findPayment("");
+                disableComponents();
+            }
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOutActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnOutActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-        // TODO add your handling code here:
+        btnSave.setText("Editar");
+        enableComponents();
+        btnDelete.setEnabled(true);
+        action = "editar";
+
+        int row = table.rowAtPoint(evt.getPoint());
+
+        txtIdPayment.setText(table.getValueAt(row, 0).toString());
+        //txtIdBooking.setText(table.getValueAt(row, 1).toString());
+        txtInvoiceNumber.setText(table.getValueAt(row, 2).toString());
+        txtVat.setText(table.getValueAt(row, 3).toString());
+        txtTotalPrice.setText(table.getValueAt(row, 4).toString());
+        dcIssueDate.setDate(Date.valueOf(table.getValueAt(row, 5)
+                .toString()));
+        dcIssueDate.setDate(Date.valueOf(table.getValueAt(row, 6)
+                .toString()));
     }//GEN-LAST:event_tableMouseClicked
 
     /**
@@ -847,11 +911,10 @@ public class frmPayment extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnDelete1;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnNew;
-    private javax.swing.JButton btnOut1;
+    private javax.swing.JButton btnOut;
     private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnSearch1;
     private com.toedter.calendar.JDateChooser dcIssueDate;
     private com.toedter.calendar.JDateChooser dcPaymentDate;
     private javax.swing.JLabel jLabel1;
@@ -859,7 +922,6 @@ public class frmPayment extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -881,7 +943,6 @@ public class frmPayment extends javax.swing.JFrame {
     private javax.swing.JTextField txtIdBooking;
     private javax.swing.JTextField txtIdPayment;
     private javax.swing.JTextField txtInvoiceNumber;
-    private javax.swing.JTextField txtSearch1;
     private javax.swing.JTextField txtTotalPrice;
     private javax.swing.JTextField txtVat;
     // End of variables declaration//GEN-END:variables

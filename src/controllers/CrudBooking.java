@@ -159,6 +159,29 @@ public class CrudBooking {
             preparedStatement.setDate(7, booking.getCheckout_date());
             preparedStatement.setDouble(8, booking.getPrice());
             preparedStatement.setString(9, booking.getStatus());
+            preparedStatement.setInt(10, booking.getId_booking());
+
+            int i = preparedStatement.executeUpdate();
+
+            if (i != 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
+    
+    public boolean pay(Booking booking) {
+
+        sSql = "UPDATE booking SET status='Pagado' WHERE id_booking=?";
+
+        try {
+            PreparedStatement preparedStatement
+                    = connection.prepareStatement(sSql);
+            
             preparedStatement.setInt(1, booking.getId_booking());
 
             int i = preparedStatement.executeUpdate();

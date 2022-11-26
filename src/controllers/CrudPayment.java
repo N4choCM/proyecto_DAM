@@ -34,7 +34,7 @@ public class CrudPayment {
      * @return  An instance of javax.swing.table.DefaultTableModel with all
      * the rows found.
      */
-    public DefaultTableModel findByProductName(String search){
+    public DefaultTableModel findPayment(String search){
         DefaultTableModel model;
         
         String[] headers = {"ID", "Cód. reserva", "N.º Factura", "IVA", "Total", 
@@ -82,7 +82,7 @@ public class CrudPayment {
      */
     public boolean create (Payment payment){
         
-        sSql = "INSERT INTO payment (id_booking, invoice_number, vat, total_price,"
+        sSql = "INSERT INTO payment (id_booking, invoice_number, vat, total_payment,"
                 + " issue_date, payment_date) values (?, ?, ?, ?, ?, ?)";
         
         try{
@@ -120,7 +120,7 @@ public class CrudPayment {
     public boolean update (Payment payment){
         
         sSql = "UPDATE payment SET id_booking=?, invoice_number=?, vat=?,"
-                + " total_price=?, issue_date=?, payment_date=? WHERE id_payment=?";
+                + " total_payment=?, issue_date=?, payment_date=? WHERE id_payment=?";
         
         try{
             PreparedStatement preparedStatement = 

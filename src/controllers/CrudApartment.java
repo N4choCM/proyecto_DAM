@@ -195,6 +195,52 @@ public class CrudApartment {
             return false;
         }
     }
+    
+    public boolean freeApartment (Apartment apartment){
+        
+        sSql = "UPDATE room SET status='Disponible' WHERE id_room = ?";
+        
+        try{
+            PreparedStatement preparedStatement = 
+                    connection.prepareStatement(sSql);
+            
+            preparedStatement.setInt(1, apartment.getId_room());
+            
+            int i = preparedStatement.executeUpdate();
+            
+            if(i != 0) {
+                return true;
+            }else{
+                return false;
+            }
+        }catch (SQLException e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
+    
+    public boolean bookApartment (Apartment apartment){
+        
+        sSql = "UPDATE room SET status='No disponible' WHERE id_room = ?";
+        
+        try{
+            PreparedStatement preparedStatement = 
+                    connection.prepareStatement(sSql);
+            
+            preparedStatement.setInt(1, apartment.getId_room());
+            
+            int i = preparedStatement.executeUpdate();
+            
+            if(i != 0) {
+                return true;
+            }else{
+                return false;
+            }
+        }catch (SQLException e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
         
     /**
      * Method that deletes an Apartment in the DB.

@@ -196,6 +196,7 @@ public class frmBooking extends javax.swing.JInternalFrame {
         table = new javax.swing.JTable();
         lblTotalRegistries = new javax.swing.JLabel();
         btnConsumptions = new javax.swing.JButton();
+        btnPayment = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(34, 40, 49));
         setClosable(true);
@@ -593,6 +594,17 @@ public class frmBooking extends javax.swing.JInternalFrame {
             }
         });
 
+        btnPayment.setBackground(new java.awt.Color(57, 62, 70));
+        btnPayment.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnPayment.setForeground(new java.awt.Color(238, 238, 238));
+        btnPayment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/ahorrar-dinero.png"))); // NOI18N
+        btnPayment.setText("Pagos");
+        btnPayment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPaymentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -602,6 +614,8 @@ public class frmBooking extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnConsumptions)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnPayment)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblTotalRegistries)
                         .addGap(82, 82, 82))
@@ -635,7 +649,9 @@ public class frmBooking extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTotalRegistries)
-                    .addComponent(btnConsumptions))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnConsumptions)
+                        .addComponent(btnPayment)))
                 .addContainerGap())
         );
 
@@ -690,14 +706,14 @@ public class frmBooking extends javax.swing.JInternalFrame {
             );
 
             if (confirmation == 0) {
-                CrudApartment crudApartment = new CrudApartment();
-                Apartment apartment = new Apartment();
+                CrudBooking crudBooking = new CrudBooking();
+                Booking booking = new Booking();
 
-                apartment.setId_room(
+                booking.setId_booking(
                         Integer.parseInt(
                                 txtIdBooking.getText()
                         ));
-                crudApartment.delete(apartment);
+                crudBooking.delete(booking);
                 findBookings("");
                 disableComponents();
             }
@@ -887,6 +903,14 @@ public class frmBooking extends javax.swing.JInternalFrame {
                 );
                 findBookings("");
                 disableComponents();
+                
+                //OCUPAR HABITACIÓN
+                CrudApartment crudApartment = new CrudApartment();
+                Apartment apartment = new Apartment();
+                
+                apartment.setId_room(Integer.parseInt(txtIdRoom
+                        .getText()));
+                crudApartment.bookApartment(apartment);
 
             }
         } else if (action.equals("editar")) {
@@ -912,6 +936,21 @@ public class frmBooking extends javax.swing.JInternalFrame {
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaymentActionPerformed
+        int row = table.getSelectedRow();
+        
+        frmPayment.id_booking = table.getValueAt(row, 0).toString();
+        frmPayment.customer = table.getValueAt(row, 4).toString();
+        frmPayment.booking_price = Double.parseDouble(table.getValueAt(row, 11).toString());
+        frmPayment.id_apartment = table.getValueAt(row, 1).toString();
+        frmPayment.apartment = table.getValueAt(row, 2).toString();
+        
+        frmPayment frmPayment = new frmPayment();
+        frmHome.desktop.add(frmPayment);
+        frmPayment.toFront();
+        frmPayment.setVisible(true);
+    }//GEN-LAST:event_btnPaymentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -957,6 +996,7 @@ public class frmBooking extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnOut;
+    private javax.swing.JButton btnPayment;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSearchApartment;
