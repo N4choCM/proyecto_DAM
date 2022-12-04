@@ -174,6 +174,11 @@ public class CrudBooking {
         }
     }
     
+    /**
+     * Method that changes the status of a Booking from Unpayed to payed.
+     * @param booking The Booking whose status is going to be changed.
+     * @return True if the status was successfully changed and false if it was not.
+     */
     public boolean pay(Booking booking) {
 
         sSql = "UPDATE booking SET status='Pagado' WHERE id_booking=?";

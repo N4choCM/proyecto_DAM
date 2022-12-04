@@ -5,8 +5,13 @@
 package entity;
 
 /**
- *
- * @author nacho
+ * Model of the Employees to be stored in the DB. The attributes have the exact
+ * same name as in the DB table called 'employee' - that is why camelCase is not
+ * used. It also has an empty constructor and another one with all the 
+ * parameters. Additionally, the getters and setters for each attribute are found,
+ * as well as the toString() method. This class is one of the subclasses of Person.
+ * @see Person.java
+ * @author Juan Ignacio Campos Martí
  */
 public class Employee extends Person{
     

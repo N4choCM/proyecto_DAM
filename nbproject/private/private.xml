@@ -3,10 +3,35 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/frames/frmConsumption.java</file>
-            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/frames/frmPayment.java</file>
-            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/frames/frmBooking.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/entity/Employee.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/build.xml</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/controllers/DbConnection.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/controllers/CrudCustomer.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/entity/Product.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/frames/FrmApartment.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/frames/FrmBooking.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/frames/FrmCustomerView.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/frames/FrmProductsView.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/entity/Booking.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/entity/Customer.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/controllers/CrudApartment.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/frames/FrmProduct.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/frames/FrmHome.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/controllers/CrudBooking.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/entity/Apartment.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/controllers/CrudEmployee.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/entity/Consumption.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/entity/Person.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/entity/Payment.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/controllers/CrudProduct.java</file>
             <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/controllers/CrudConsumption.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/frames/FrmCustomer.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/controllers/CrudPayment.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/frames/FrmConsumption.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/frames/FrmApartmentView.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/frames/FrmUserLogin.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/frames/FrmPayment.java</file>
+            <file>file:/C:/Users/nacho/OneDrive/Escritorio/NachoProgramador/ProyectoDAM/TouristicApartmentManager/src/frames/FrmEmployee.java</file>
         </group>
     </open-files>
 </project-private>

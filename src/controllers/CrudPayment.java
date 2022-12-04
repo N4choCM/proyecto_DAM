@@ -5,7 +5,6 @@
 package controllers;
 
 import entity.Payment;
-import entity.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  * Class that establishes the CRUD methods to Create, Retrieve, Update and 
- * Delete Products in the table 'product' of the DB bookings_db.
+ * Delete Payments in the table 'payment' of the DB bookings_db.
  * @author Juan Ignacio Campos Martí
  */
 public class CrudPayment {
@@ -27,8 +26,8 @@ public class CrudPayment {
     public int totalRegistries;
     
     /**
-     * Method that finds Products by their name field.
-     * It will be later linked to the listener of the 'Buscar producto'
+     * Method that finds Payments.
+     * It will be later linked to the listener of the 'Pagos'
      * button (btnSearch).
      * @param search The data entered by the user to be found in the DB.
      * @return  An instance of javax.swing.table.DefaultTableModel with all
@@ -74,10 +73,10 @@ public class CrudPayment {
     }
     
     /**
-     * Method that enters a new Product in the DB.
+     * Method that enters a new Payment in the DB.
      * It will be later linked to the listener of the 'Nuevo' button (btnNew).
-     * @param payment The data of the new Product to be stored in the DB.
-     * @return True if the new Product was stored successfully or false if 
+     * @param payment The data of the new Payment to be stored in the DB.
+     * @return True if the new Payment was stored successfully or false if 
      * it was not.
      */
     public boolean create (Payment payment){
@@ -110,11 +109,11 @@ public class CrudPayment {
     }
     
     /**
-     * Method that updates a Product in the DB.
+     * Method that updates a Payment in the DB.
      * It will be later linked to the listener of the 'Editar' button 
      * (btnUpdate).
-     * @param payment The data of the Product to be updated in the DB.
-     * @return True if the Product was updated successfully or false if 
+     * @param payment The data of the Payment to be updated in the DB.
+     * @return True if the Payment was updated successfully or false if 
      * it was not.
      */
     public boolean update (Payment payment){
@@ -149,11 +148,11 @@ public class CrudPayment {
     }
         
     /**
-     * Method that deletes a Product in the DB.
+     * Method that deletes a Payment in the DB.
      * It will be later linked to the listener of the 'Eliminar' button 
      * (btnDelete).
-     * @param payment The data of the Product to be deleted in the DB.
-     * @return True if the Product was deleted successfully or false if 
+     * @param payment The data of the Payment to be deleted in the DB.
+     * @return True if the Payment was deleted successfully or false if 
      * it was not.
      */
     public boolean delete (Payment payment){

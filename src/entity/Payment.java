@@ -7,8 +7,12 @@ package entity;
 import java.sql.Date;
 
 /**
- *
- * @author nacho
+ * Model of the Payments to be stored in the DB. The attributes have the exact
+ * same name as in the DB table called 'payment' - that is why camelCase is not
+ * used. It also has an empty constructor and another one with all the 
+ * parameters. Additionally, the getters and setters for each attribute are found,
+ * as well as the toString() method. 
+ * @author Juan Ignacio Campos Martí
  */
 public class Payment {
     private int id_payment;
